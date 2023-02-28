@@ -8,7 +8,7 @@ const loginFormElement = document.querySelector('#loginForm');
 const signupFormElement = document.querySelector('#signUpForm');
 
 let frontEndData = {};
-let currentUser= {}
+let currentUser = {};
 
 const constructUser = (username, password) => {
   return {
