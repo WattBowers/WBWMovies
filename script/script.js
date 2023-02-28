@@ -1,5 +1,5 @@
 import firebase from './firebase.js';
-import { getDatabase, ref, onValue, get, push } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+import { getDatabase, ref, onValue, push } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 
 const database = getDatabase(firebase);
 const dbRef = ref(database);
@@ -38,9 +38,9 @@ signupFormElement.addEventListener('submit', e => {
   const givenUsername = e.target[0].value
   const givenPassword = e.target[1].value
 
-  const userArray = ref(database, 'users')
+  const userObject = ref(database, 'users')
 
-  push(userArray, constructUser(givenUsername, givenPassword))
+  push(userObject, constructUser(givenUsername, givenPassword))
 })
 
 onValue(dbRef, (data) => {
