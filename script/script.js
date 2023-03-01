@@ -1,4 +1,5 @@
 import firebase from './firebase.js';
+import constructUser from './constructUser.js';
 import { getDatabase, ref, onValue, push } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 
 const database = getDatabase(firebase);
@@ -10,12 +11,7 @@ const signupFormElement = document.querySelector('#signUpForm');
 let frontEndData = {};
 let currentUser = {};
 
-const constructUser = (username, password) => {
-  return {
-    "username": username,
-    "password": password,
-  }
-}
+
 
 loginFormElement.addEventListener('submit', e => {
     e.preventDefault();
