@@ -15,35 +15,35 @@ if (window.location.pathname === '/index.html') {
   const signupFormElement = document.querySelector('#signUpForm');
 
   loginFormElement.addEventListener('submit', e => {
-      e.preventDefault();
-      const givenUsername = e.target[0].value;
-      const givenPassword = e.target[1].value;
-  
-      //for loop going through users checking to see if username and password match a specific user
-    
-      Object.values(frontEndData.users).forEach((user) => {
-        if(user.username === givenUsername && user.password === givenPassword) {
-          setCurrentUser(user);
-          console.log(currentUser)
-          window.localStorage.setItem('user', JSON.stringify(currentUser))
-          console.log(window.localStorage.user)
-          window.location.replace('functionality.html')
-        }
-      })
+    e.preventDefault();
+    const givenUsername = e.target[0].value;
+    const givenPassword = e.target[1].value;
+
+    //for loop going through users checking to see if username and password match a specific user
+
+    Object.values(frontEndData.users).forEach((user) => {
+      if (user.username === givenUsername && user.password === givenPassword) {
+        setCurrentUser(user);
+        console.log(currentUser)
+        window.localStorage.setItem('user', JSON.stringify(currentUser))
+        console.log(window.localStorage.user)
+        window.location.replace('functionality.html')
+      }
+    })
   })
-  
+
   signupFormElement.addEventListener('submit', e => {
     e.preventDefault();
     const givenUsername = e.target[0].value;
     const givenPassword = e.target[1].value;
-    let isTakenUsername = false; 
+    let isTakenUsername = false;
     const userObject = ref(database, 'users');
-  
+
     // check to see if username already exists
-  
-    for(let user in frontEndData.users) {
+
+    for (let user in frontEndData.users) {
       let checkUser = frontEndData.users[user].username;
-      if(givenUsername === checkUser) {
+      if (givenUsername === checkUser) {
         isTakenUsername = true;
         break;
       }
@@ -54,11 +54,11 @@ if (window.location.pathname === '/index.html') {
       setCurrentUser(constructUser(givenUsername, givenPassword));
     }
   })
-  
+
   onValue(dbRef, (data) => {
-      if(data.exists()){
-        frontEndData = data.val();
-      }
-    });
+    if (data.exists()) {
+      frontEndData = data.val();
+    }
+  });
 }
 
