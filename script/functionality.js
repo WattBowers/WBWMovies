@@ -1,13 +1,7 @@
-const logOutButton = document.getElementById('logOut')
-const testButton = document.getElementById('test')
-
-
-testButton.addEventListener('click', e => {
-  const user = JSON.parse(window.localStorage.getItem('user'))
-  console.log(user)
-  })
+const logOutButton = document.getElementById('logOut');
+const currentUser = JSON.parse(window.localStorage.getItem('user'));
 
 logOutButton.addEventListener('click', e => {
-  window.localStorage.removeItem('user')
-  window.location.assign('index.html')
-  })
+  window.localStorage.removeItem('user');
+  window.location.assign('index.html');
+  })  
