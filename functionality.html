@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,10 +8,45 @@
     <title>Document</title>
     <link rel="stylesheet" href="./styles/style.css">
 </head>
+
 <body class="functionalityPage">
-    <button id="logOut">Log Out</button>
+    <header>
+        <div class="wrapper">
+            <h1>Movie app</h1>
+            <button id="logOut">Log Out</button>
+        </div>
+    </header>
+    <main>
+        <section class="movies">
+            <div class="wrapper">
+                <h2>Movies</h2>
+                <button id="addMovie" aria-label="Add a movie">+</button>
+                <form action="submit">
+                    <label for="movieTitle" class="sr-only">Title - Required</label>
+                    <input id="movieTitle" placeholder="Title *" required="true" type="text">
+
+                    <label for="runtime" class="sr-only">Runtime</label>
+                    <input id="runtime" placeholder="Runtime" type="text">
+
+                    <label for="movieGenre" class="sr-only">Genre</label>
+                    <input id="movieGenre" placeholder="Genre" type="text">
+
+                    <label for="movieYear" class="sr-only">Year</label>
+                    <input id="movieYear" placeholder="Year" type="text">
+
+                    <label for="movieSynopsis" class="sr-only">Synopsis</label>
+                    <textarea id="movieSynopsis" placeholder="Synopsis"></textarea>
+
+                    <button type="submit">Add to list</button>
+                </form>
+                <ul>
+                    <!-- Content to be added in here -->
+                </ul>
+            </div>
+        </section>
+    </main>
     <script src="./script/script.js" type="module"></script>
     <script src="./script/functionality.js" type="module"></script>
-    
 </body>
+
 </html>
