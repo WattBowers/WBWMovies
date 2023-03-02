@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Open+Sans&display=swap');
+
+$headingFont: 'Open Sans', sans-serif;
+$bodyFont: 'Inter', sans-serif;
+$primary: #00BFFF;
+$secondary: #FFF;
+$tertiary: #708090;
+
+@mixin titleText {
+    font-family: $headingFont;
+    font-size: 2.3rem;
+    text-transform: uppercase;
+    line-height: 1.2rem;
+    letter-spacing: .1px;
+}
+
+@mixin bodyText {
+    font-family: $bodyFont;
+    font-size: .7rem;
+    line-height: 1.2rem;
+    letter-spacing: .3px;
+}
+
+
+html {
+    @include bodyText;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.wrapper {
+    max-width: 1200px;
+    width: 85%;
+    margin: 0 auto;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+}
