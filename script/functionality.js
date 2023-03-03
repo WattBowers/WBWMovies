@@ -8,16 +8,26 @@ let frontEndData;
 const logOutButton = document.getElementById('logOut');
 const currentUser = JSON.parse(window.localStorage.getItem('user'));
 
+
+
 logOutButton.addEventListener('click', e => {
   window.localStorage.removeItem('user');
   window.location.assign('index.html');
 })
 
-const moviesRef = ref(database, `/${currentUser.movies}`);
+//const moviesRef = ref(database, `/${currentUser.movies}`);
 console.log(currentUser);
 const moviesUl = document.querySelector('.moviesList');
 
 onValue(dbRef, (data) => {
+  frontEndData = data.val();
+  for(let user in frontEndData.users) {
+    if (currentUser.username === user.username) {
+      console.log(currentUser, user)
+      currentUser = user;
+    }
+  }
+  
   if (data.exists()) {
     moviesUl.innerHTML = '';
     const movieList = data.val();

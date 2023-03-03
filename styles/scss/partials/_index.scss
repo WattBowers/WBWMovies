@@ -1,0 +1,15 @@
+@use "../partials/global" as *;
+
+.passwordWarning {
+    @include bodyText;
+    color: grey;
+}
+
+.sameUsernameWarning {
+    @include bodyText;
+    color: grey;
+}
+
+.hidden {
+    display: none;
+}

@@ -13,11 +13,13 @@ const setCurrentUser = (value) => (currentUser = value)
 if (window.location.pathname === '/index.html') {
   const loginFormElement = document.querySelector('#loginForm');
   const signupFormElement = document.querySelector('#signUpForm');
+  
 
   loginFormElement.addEventListener('submit', e => {
     e.preventDefault();
     const givenUsername = e.target[0].value;
     const givenPassword = e.target[1].value;
+    
 
     //for loop going through users checking to see if username and password match a specific user
 
@@ -34,15 +36,25 @@ if (window.location.pathname === '/index.html') {
     e.preventDefault();
     const givenUsername = e.target[0].value;
     const givenPassword = e.target[1].value;
+    const givenConfirmPassword = e.target[2].value;
     let isTakenUsername = false;
     const userObject = ref(database, 'users');
 
-    // check to see if username already exists
+    
+    // Make sure that both passwords match
+    if (givenPassword !== givenConfirmPassword) {
+      const pElement = document.querySelector('.passwordWarning')
+      pElement.classList.remove('hidden')
+      return;
+    }
 
+  // check to see if username already exists
     for (let user in frontEndData.users) {
       let checkUser = frontEndData.users[user].username;
+      const pUsernameElement = document.querySelector('.sameUsernameWarning')
       if (givenUsername === checkUser) {
         isTakenUsername = true;
+        pUsernameElement.classList.remove('hidden')
         break;
       }
     }
