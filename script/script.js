@@ -11,7 +11,7 @@ let currentUser = {};
 
 const setCurrentUser = (value) => (currentUser = value)
 
-if (window.location.pathname === '/index.html') {
+if (window.location.pathname !== '/functionality.html') {
   const loginFormElement = document.querySelector('#loginForm');
   const signupFormElement = document.querySelector('#signUpForm');
   
