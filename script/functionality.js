@@ -10,7 +10,7 @@ const testButton = document.getElementById('test');
 let currentUser = JSON.parse(window.localStorage.getItem('user'));
 
 testButton.addEventListener('click', e => {
-  console.log(frontEndData)
+  console.log(frontEndData);
 })
 
 logOutButton.addEventListener('click', e => {
@@ -19,11 +19,10 @@ logOutButton.addEventListener('click', e => {
 })
 
 //const moviesRef = ref(database, `/${currentUser.movies}`);
-console.log(currentUser);
 const moviesUl = document.querySelector('.moviesList');
 
 const connectFrontEnd = (data) => {
-  for(let user in data.users) {
+  for (let user in data.users) {
     if (currentUser.username === data.users[user].username) {
       currentUser = data.users[user];
       const userRef = ref(database, 'users/' + user + '/movies');
@@ -35,20 +34,42 @@ const connectFrontEnd = (data) => {
 }
 
 onValue(dbRef, (data) => {
-  console.log('were here')
   if (data.exists()) {
     connectFrontEnd(data.val());
-    
+
     //connecting database to currentUser
-    
-  
-  
+
     moviesUl.innerHTML = '';
     const movieList = data.val();
-    console.log(currentUser)
-  for (let key in currentUser.movies) {
-    console.log(key)
-  }
+    for (let key in currentUser.movies) {
+      console.log(currentUser.movies[key].runtime)
+      //  const runtime = movieList[key].runtime;
+      //  const genre = movieList[key].genre;
+      //  const year = movieList[key].year;
+      //  const synopsis = movieList[key].synopsis;
+      //
+      const li = document.createElement('li');
+      li.innerHTML =
+        `<h3>${key}</h3>
+        <div class="stats">
+        <h4>Runtime:</h4><p>${currentUser.movies[key].runtime}</p><br>
+        </div>
+        <div class="stats">
+        <h4>Genre:</h4><p>${currentUser.movies[key].genre}</p><br>
+        </div>
+        <div class="stats">
+        <h4>Year:</h4><p>${currentUser.movies[key].year}</p><br>
+        </div>
+        <div class="stats">
+        <h4>Synopsis:</h4><p>${currentUser.movies[key].synopsis}</p><br>
+        </div>       `
+      //  const h3 = document.createElement('h3');
+
+      //  h3.textContent = title;
+      // //
+      moviesUl.append(li);
+      //  li.append(h3);
+    }
 
     //for (let key in movieList.users) {
     //  const title = movieList[key];
@@ -57,12 +78,12 @@ onValue(dbRef, (data) => {
     //  const genre = movieList[key].genre;
     //  const year = movieList[key].year;
     //  const synopsis = movieList[key].synopsis;
-//
+    //
     //  const li = document.createElement('li');
     //  const h3 = document.createElement('h3');
-//
+    //
     //  h3.textContent = title;
-//
+    //
     //  moviesUl.append(li);
     //  li.append(h3);
     //}

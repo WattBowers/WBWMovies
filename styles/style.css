@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Open+Sans:wght@700&display=swap");
 html {
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
@@ -249,7 +249,16 @@ img {
 
 ul {
   list-style: none;
-  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 2.3rem;
+  line-height: 1.2rem;
+  letter-spacing: 0.1px;
+  text-align: center;
+  font-size: 3rem;
 }
 
 button {
@@ -262,6 +271,7 @@ button {
   border-style: none;
   width: 10rem;
   margin: 0 auto;
+  display: block;
 }
 
 form {
@@ -273,12 +283,39 @@ form {
       -ms-flex-direction: column;
           flex-direction: column;
 }
-form input {
+form input, form textarea {
   padding: 1rem;
   margin: 1rem 0;
   border-radius: 1.5rem;
   border-style: solid;
   outline: none;
+}
+form textarea {
+  resize: none;
+  height: 10rem;
+}
+
+h3 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 2.3rem;
+  line-height: 1.2rem;
+  letter-spacing: 0.1px;
+  font-size: 2rem;
+  margin-bottom: 3.6rem;
+}
+
+.stats {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 2.4rem 0;
+}
+.stats h4, .stats p {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.stats p {
+  margin-left: 1.2rem;
 }
 
 .passwordWarning {
