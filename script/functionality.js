@@ -10,7 +10,7 @@ let currentUser = JSON.parse(window.localStorage.getItem('user'));
 
 logOutButton.addEventListener('click', e => {
   window.localStorage.removeItem('user');
-  window.location.assign('index.html');
+  window.location.assign('https://project02movietracker.netlify.app/index.html');
 })
 
 const connectFrontEnd = (data) => {
