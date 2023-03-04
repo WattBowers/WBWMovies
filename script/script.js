@@ -16,6 +16,7 @@ if (window.location.pathname === '/index.html') {
   
 
   loginFormElement.addEventListener('submit', e => {
+    debugger;
     e.preventDefault();
     const givenUsername = e.target[0].value;
     const givenPassword = e.target[1].value;
@@ -25,7 +26,7 @@ if (window.location.pathname === '/index.html') {
 
     Object.values(frontEndData.users).forEach((user) => {
       if (user.username === givenUsername && user.password === givenPassword) {
-        debuger;
+        
         setCurrentUser(user);
         console.log(currentUser)
         window.localStorage.setItem('user', JSON.stringify(currentUser));
