@@ -26,10 +26,32 @@ const connectFrontEnd = (data) => {
         const movieList = data.val();
         //looping through list of movies, and creating Elements to represent the movie
         for (let key in currentUser.movies) {
-          const runtime = movieList[key].runtime;
-          const genre = movieList[key].genre;
-          const year = movieList[key].year;
-          const synopsis = movieList[key].synopsis;
+          
+          let runtime;
+          let genre; 
+          let year; 
+          let synopsis; 
+
+          if(movieList[key].runtime === undefined) {
+            runtime = '';
+          } else {
+            runtime = movieList[key].runtime
+          }
+          if(movieList[key].genre === undefined) {
+            genre = '';
+          } else {
+            genre = movieList[key].genre
+          }
+          if(movieList[key].year === undefined) {
+            year = '';
+          } else {
+            year = movieList[key].year
+          }
+          if(movieList[key].synopsis === undefined) {
+            synopsis = '';
+          } else {
+            synopsis = movieList[key].synopsis
+          }
       
           const li = document.createElement('li');
           //setting HTML to users cant inject malicious code
