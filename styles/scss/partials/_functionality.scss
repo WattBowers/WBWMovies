@@ -1,0 +1,29 @@
+@use "./global.scss" as *;
+
+.listHeader {
+    margin: 0;
+    padding: 2rem;
+
+    &:hover {
+        background-color: #FFFAF0;
+    }
+}
+
+li {
+    border-top: 1px solid $tertiary;
+
+    &:last-of-type {
+        border-bottom: 1px solid $tertiary;
+    }
+}
+
+
+.statContainer {
+    max-height: 0;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.expand {
+    max-height: 50rem;
+}

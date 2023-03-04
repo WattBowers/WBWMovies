@@ -7,7 +7,7 @@ const logOutButton = document.getElementById('logOut');
 const moviesUl = document.querySelector('.moviesList');
 let userRef;
 let currentUser = JSON.parse(window.localStorage.getItem('user'));
-if(currentUser === null) {
+if (currentUser === null) {
   window.location.assign('/index.html');
 }
 
@@ -24,7 +24,6 @@ const addMovie = (title, runtime, genre, year, synopsis, userRef) => {
     year: year,
     synopsis: synopsis,
   }
-  console.log(movie, title, runtime, genre, year, synopsis);
   push(userRef, movie);
 }
 
@@ -41,55 +40,62 @@ const connectFrontEnd = (data) => {
         const movieList = data.val();
         //looping through list of movies, and creating Elements to represent the movie
         for (let key in currentUser.movies) {
-          
+
           let title;
           let runtime;
-          let genre; 
-          let year; 
-          let synopsis; 
+          let genre;
+          let year;
+          let synopsis;
 
-          if(movieList[key].title === undefined) {
+          if (movieList[key].title === undefined) {
             title = '';
           } else {
-            title = movieList[key].title
+            title = movieList[key].title;
           }
-          if(movieList[key].runtime === undefined) {
+          if (movieList[key].runtime === undefined) {
             runtime = '';
           } else {
-            runtime = movieList[key].runtime
+            runtime = movieList[key].runtime;
           }
-          if(movieList[key].genre === undefined) {
+          if (movieList[key].genre === undefined) {
             genre = '';
           } else {
-            genre = movieList[key].genre
+            genre = movieList[key].genre;
           }
-          if(movieList[key].year === undefined) {
+          if (movieList[key].year === undefined) {
             year = '';
           } else {
-            year = movieList[key].year
+            year = movieList[key].year;
           }
-          if(movieList[key].synopsis === undefined) {
+          if (movieList[key].synopsis === undefined) {
             synopsis = '';
           } else {
-            synopsis = movieList[key].synopsis
+            synopsis = movieList[key].synopsis;
           }
           const li = document.createElement('li');
           //setting HTML to users cant inject malicious code
-          li.innerHTML = `<h3>${title}</h3>
+          li.innerHTML = `<h3 class="listHeader">${title}</h3>
+          <div class="statContainer">
           <div class="stats">
-          <h4>Runtime:</h4><p>${runtime}</p><br>
+          <h4>Runtime:</h4><p>${runtime}</p>
           </div>
           <div class="stats">
-          <h4>Genre:</h4><p>${genre}</p><br>
+          <h4>Genre:</h4><p>${genre}</p>
           </div>
           <div class="stats">
-          <h4>Year:</h4><p>${year}</p><br>
+          <h4>Year:</h4><p>${year}</p>
           </div>
           <div class="stats">
-          <h4>Synopsis:</h4><p>${synopsis}</p><br>
+          <h4>Synopsis:</h4><p>${synopsis}</p>
+          </div>
           </div>`
-       
+
           moviesUl.append(li);
+
+          li.firstChild.addEventListener('click', function(){
+            const statContainer = this.nextElementSibling;
+            statContainer.classList.toggle('expand');
+          })
         }
       })
     }
@@ -113,5 +119,7 @@ movieForm.addEventListener('submit', function (event) {
   const year = document.getElementById('movieYear').value;
   const synopsis = document.getElementById('movieSynopsis').value;
 
-  addMovie(title, runtime, genre, year, synopsis, userRef) 
+  addMovie(title, runtime, genre, year, synopsis, userRef);
+  movieForm.reset();
 })
+
