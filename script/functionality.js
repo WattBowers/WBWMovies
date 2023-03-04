@@ -57,7 +57,7 @@ const connectFrontEnd = (data) => {
           console.log(runtime, genre, year, synopsis)
           const li = document.createElement('li');
           //setting HTML to users cant inject malicious code
-          li.innerHTML `<h3>${key}</h3>
+          li.innerHTML = `<h3>${key}</h3>
           <div class="stats">
           <h4>Runtime:</h4><p>${runtime}</p><br>
           </div>
