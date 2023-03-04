@@ -28,7 +28,7 @@ if (window.location.pathname === '/index.html') {
         setCurrentUser(user);
         console.log(currentUser)
         window.localStorage.setItem('user', JSON.stringify(currentUser));
-        window.location.assign('https://project02movietracker.netlify.app/functionality.html');
+        window.location.assign('functionality.html');
       }
     })
   })
