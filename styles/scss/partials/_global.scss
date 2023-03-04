@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Open+Sans:wght@700&display=swap');
 
 $headingFont: 'Open Sans', sans-serif;
 $bodyFont: 'Inter', sans-serif;
@@ -9,7 +9,6 @@ $tertiary: #708090;
 @mixin titleText {
     font-family: $headingFont;
     font-size: 2.3rem;
-    text-transform: uppercase;
     line-height: 1.2rem;
     letter-spacing: .1px;
 }
@@ -40,5 +39,58 @@ img {
 
 ul {
     list-style: none;
-    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    @include titleText;
+    text-align: center;
+    font-size: 3rem;
+}
+
+button {
+    background-color: $primary;
+    background-color: #00BFFF;
+    padding: 1.2rem 0;
+    border-radius: 5rem;
+    text-transform: uppercase;
+    color: $secondary;
+    border-style: none;
+    width: 10rem;
+    margin: 0 auto;
+    display: block;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    input, textarea {
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 1.5rem;
+        border-style: solid;
+        outline: none;
+    }
+    textarea {
+        resize: none;
+        height: 10rem;
+    }
+}
+
+h3 {
+    @include titleText;
+    font-size: 2rem;
+    margin-bottom: 3.6rem;
+}
+
+.stats {
+    display: flex;
+    margin: 2.4rem 0;
+    h4, p {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+    p {
+        margin-left: 1.2rem;
+    }
 }
