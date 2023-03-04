@@ -1,10 +1,11 @@
 import firebase from './firebase.js'
-import { getDatabase, ref, onValue, push, get } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+import { getDatabase, ref, onValue, push } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 
 const database = getDatabase(firebase);
 const dbRef = ref(database);
 const logOutButton = document.getElementById('logOut');
 const moviesUl = document.querySelector('.moviesList');
+let userRef;
 let currentUser = JSON.parse(window.localStorage.getItem('user'));
 if(currentUser === null) {
   window.location.assign('/index.html');
@@ -15,13 +16,25 @@ logOutButton.addEventListener('click', e => {
   window.location.assign('https://project02movietracker.netlify.app/index.html');
 })
 
+const addMovie = (title, runtime, genre, year, synopsis, userRef) => {
+  const movie = {
+    title: title,
+    runtime: runtime,
+    genre: genre,
+    year: year,
+    synopsis: synopsis,
+  }
+  console.log(movie, title, runtime, genre, year, synopsis);
+  push(userRef, movie);
+}
+
 const connectFrontEnd = (data) => {
   //connecting the local user object to the databse user object
   for (let user in data.users) {
     if (currentUser.username === data.users[user].username) {
       currentUser = data.users[user];
       //creating a reference at the specific users /movie direcotry
-      const userRef = ref(database, 'users/' + user + '/movies');
+      userRef = ref(database, 'users/' + user + '/movies');
       //listening to changes in the /movies directory to respond to  changes
       onValue(userRef, (data) => {
         moviesUl.innerHTML = '';
@@ -29,11 +42,17 @@ const connectFrontEnd = (data) => {
         //looping through list of movies, and creating Elements to represent the movie
         for (let key in currentUser.movies) {
           
+          let title;
           let runtime;
           let genre; 
           let year; 
           let synopsis; 
 
+          if(movieList[key].title === undefined) {
+            title = '';
+          } else {
+            title = movieList[key].title
+          }
           if(movieList[key].runtime === undefined) {
             runtime = '';
           } else {
@@ -54,10 +73,9 @@ const connectFrontEnd = (data) => {
           } else {
             synopsis = movieList[key].synopsis
           }
-          console.log(runtime, genre, year, synopsis)
           const li = document.createElement('li');
           //setting HTML to users cant inject malicious code
-          li.innerHTML = `<h3>${key}</h3>
+          li.innerHTML = `<h3>${title}</h3>
           <div class="stats">
           <h4>Runtime:</h4><p>${runtime}</p><br>
           </div>
@@ -89,9 +107,11 @@ const movieForm = document.querySelector('#movieForm');
 
 movieForm.addEventListener('submit', function (event) {
   event.preventDefault();
-  const title = document.getElementById('movieTitle');
-  const runtime = document.getElementById('runtime');
-  const genre = document.getElementById('movieGenre');
-  const year = document.getElementById('movieYear');
-  const synopsis = document.getElementById('movieSynopsis');
+  const title = document.getElementById('movieTitle').value;
+  const runtime = document.getElementById('runtime').value;
+  const genre = document.getElementById('movieGenre').value;
+  const year = document.getElementById('movieYear').value;
+  const synopsis = document.getElementById('movieSynopsis').value;
+
+  addMovie(title, runtime, genre, year, synopsis, userRef) 
 })
