@@ -4,30 +4,51 @@ import { getDatabase, ref, onValue, push, get } from "https://www.gstatic.com/fi
 const database = getDatabase(firebase);
 const dbRef = ref(database);
 
-let frontEndData = {};
 const logOutButton = document.getElementById('logOut');
-const testButton = document.getElementById('test');
+const moviesUl = document.querySelector('.moviesList');
 let currentUser = JSON.parse(window.localStorage.getItem('user'));
-
-testButton.addEventListener('click', e => {
-  console.log(frontEndData);
-})
 
 logOutButton.addEventListener('click', e => {
   window.localStorage.removeItem('user');
   window.location.assign('index.html');
 })
 
-//const moviesRef = ref(database, `/${currentUser.movies}`);
-const moviesUl = document.querySelector('.moviesList');
-
 const connectFrontEnd = (data) => {
+  //connecting the local user object to the databse user object
   for (let user in data.users) {
     if (currentUser.username === data.users[user].username) {
       currentUser = data.users[user];
+      //creating a reference at the specific users /movie direcotry
       const userRef = ref(database, 'users/' + user + '/movies');
+      //listening to changes in the /movies directory to respond to  changes
       onValue(userRef, (data) => {
-        console.log(data.val())
+        moviesUl.innerHTML = '';
+        const movieList = data.val();
+        //looping through list of movies, and creating Elements to represent the movie
+        for (let key in currentUser.movies) {
+          const runtime = movieList[key].runtime;
+          const genre = movieList[key].genre;
+          const year = movieList[key].year;
+          const synopsis = movieList[key].synopsis;
+      
+          const li = document.createElement('li');
+          //setting HTML to users cant inject malicious code
+          li.setHTML( `<h3>${key}</h3>
+          <div class="stats">
+          <h4>Runtime:</h4><p>${runtime}</p><br>
+          </div>
+          <div class="stats">
+          <h4>Genre:</h4><p>${genre}</p><br>
+          </div>
+          <div class="stats">
+          <h4>Year:</h4><p>${year}</p><br>
+          </div>
+          <div class="stats">
+          <h4>Synopsis:</h4><p>${synopsis}</p><br>
+          </div>`) 
+       
+          moviesUl.append(li);
+        }
       })
     }
   }
@@ -35,58 +56,8 @@ const connectFrontEnd = (data) => {
 
 onValue(dbRef, (data) => {
   if (data.exists()) {
+    //this function does the work of gettign the user information, and showing the movies list
     connectFrontEnd(data.val());
-
-    //connecting database to currentUser
-
-    moviesUl.innerHTML = '';
-    const movieList = data.val();
-    for (let key in currentUser.movies) {
-      console.log(currentUser.movies[key].runtime)
-      //  const runtime = movieList[key].runtime;
-      //  const genre = movieList[key].genre;
-      //  const year = movieList[key].year;
-      //  const synopsis = movieList[key].synopsis;
-      //
-      const li = document.createElement('li');
-      li.innerHTML =
-        `<h3>${key}</h3>
-        <div class="stats">
-        <h4>Runtime:</h4><p>${currentUser.movies[key].runtime}</p><br>
-        </div>
-        <div class="stats">
-        <h4>Genre:</h4><p>${currentUser.movies[key].genre}</p><br>
-        </div>
-        <div class="stats">
-        <h4>Year:</h4><p>${currentUser.movies[key].year}</p><br>
-        </div>
-        <div class="stats">
-        <h4>Synopsis:</h4><p>${currentUser.movies[key].synopsis}</p><br>
-        </div>       `
-      //  const h3 = document.createElement('h3');
-
-      //  h3.textContent = title;
-      // //
-      moviesUl.append(li);
-      //  li.append(h3);
-    }
-
-    //for (let key in movieList.users) {
-    //  const title = movieList[key];
-    //  console.log(movieList.users[key].movies)
-    //  const runtime = movieList[key].runtime;
-    //  const genre = movieList[key].genre;
-    //  const year = movieList[key].year;
-    //  const synopsis = movieList[key].synopsis;
-    //
-    //  const li = document.createElement('li');
-    //  const h3 = document.createElement('h3');
-    //
-    //  h3.textContent = title;
-    //
-    //  moviesUl.append(li);
-    //  li.append(h3);
-    //}
   }
 })
 
