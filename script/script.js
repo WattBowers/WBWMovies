@@ -25,6 +25,7 @@ if (window.location.pathname === '/index.html') {
 
     Object.values(frontEndData.users).forEach((user) => {
       if (user.username === givenUsername && user.password === givenPassword) {
+        debuger;
         setCurrentUser(user);
         console.log(currentUser)
         window.localStorage.setItem('user', JSON.stringify(currentUser));
