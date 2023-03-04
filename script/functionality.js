@@ -3,10 +3,12 @@ import { getDatabase, ref, onValue, push, get } from "https://www.gstatic.com/fi
 
 const database = getDatabase(firebase);
 const dbRef = ref(database);
-
 const logOutButton = document.getElementById('logOut');
 const moviesUl = document.querySelector('.moviesList');
 let currentUser = JSON.parse(window.localStorage.getItem('user'));
+if(currentUser === null) {
+  window.location.assign('/index.html');
+}
 
 logOutButton.addEventListener('click', e => {
   window.localStorage.removeItem('user');
