@@ -54,7 +54,7 @@ const connectFrontEnd = (data) => {
           } else {
             synopsis = movieList[key].synopsis
           }
-      
+          console.log(runtime, genre, year, synopsis)
           const li = document.createElement('li');
           //setting HTML to users cant inject malicious code
           li.setHTML( `<h3>${key}</h3>
