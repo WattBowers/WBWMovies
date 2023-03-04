@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,32 +8,37 @@
     <title>Document</title>
     <link rel="stylesheet" href="./styles/style.css">
 </head>
+
 <body class="indexPage">
     <header>
-        <form id="loginForm">
-            <input id="username" type="text">
-            <label for="username">Username</label>
+        <div class="wrapper">
+            <h1>Movie app</h1>
+            <form id="loginForm">
+                <input id="username" type="text" placeholder="Username">
+                <label class="sr-only" for="username">Username</label>
 
-            <input id="password" type="text">
-            <label for="password">Password</label>
+                <input id="password" type="text" placeholder="Password">
+                <label class="sr-only" for="password">Password</label>
 
-            <button type="submit">log in</button>
-        </form>
-        <form id="signUpForm">
-            <input id="username" type="text">
-            <label for="username">Username</label>
+                <button type="submit">log in</button>
+            </form>
+            <form id="signUpForm">
+                <input id="username" type="text" placeholder="Username">
+                <label class="sr-only" for="username">Username</label>
 
-            <input id="password" type="text">
-            <label for="password">Password</label>
+                <input id="password" type="text" placeholder="Password">
+                <label class="sr-only" for="password">Password</label>
 
-            <input id="confirmPasswordpassword" type="text">
-            <label for="confirmPassword">Confirm your password</label>
+                <input id="confirmPasswordpassword" type="text" placeholder="Confirm your password">
+                <label class="sr-only" for="confirmPassword">Confirm your password</label>
 
-            <button type="submit">sign up</button>
-        </form>
-        <p class="passwordWarning hidden">Your passwords do not match</p>
-        <p class="sameUsernameWarning hidden">Sorry that username is already taken</p>
+                <button type="submit">sign up</button>
+            </form>
+            <p class="passwordWarning hidden">Your passwords do not match</p>
+            <p class="sameUsernameWarning hidden">Sorry that username is already taken</p>
+        </div>
     </header>
     <script src="./script/script.js" type="module"></script>
 </body>
+
 </html>
