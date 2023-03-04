@@ -1,6 +1,7 @@
 import firebase from './firebase.js';
 import constructUser from './constructUser.js';
 import { getDatabase, ref, onValue, push } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+debugger;
 
 const database = getDatabase(firebase);
 const dbRef = ref(database);
