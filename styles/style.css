@@ -231,7 +231,7 @@ html {
 html {
   font-family: "Inter", sans-serif;
   font-size: 0.7rem;
-  line-height: 1.2rem;
+  line-height: 1.8rem;
   letter-spacing: 0.3px;
 }
 
@@ -321,7 +321,7 @@ h3 {
 .passwordWarning {
   font-family: "Inter", sans-serif;
   font-size: 0.7rem;
-  line-height: 1.2rem;
+  line-height: 1.8rem;
   letter-spacing: 0.3px;
   color: grey;
 }
@@ -329,11 +329,37 @@ h3 {
 .sameUsernameWarning {
   font-family: "Inter", sans-serif;
   font-size: 0.7rem;
-  line-height: 1.2rem;
+  line-height: 1.8rem;
   letter-spacing: 0.3px;
   color: grey;
 }
 
 .hidden {
   display: none;
+}
+
+.listHeader {
+  margin: 0;
+  padding: 2rem;
+}
+.listHeader:hover {
+  background-color: #FFFAF0;
+}
+
+li {
+  border-top: 1px solid #708090;
+}
+li:last-of-type {
+  border-bottom: 1px solid #708090;
+}
+
+.statContainer {
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.expand {
+  max-height: 50rem;
 }
