@@ -20,7 +20,7 @@ logOutButton.addEventListener('click', e => {
   window.localStorage.removeItem('user');
   window.location.assign('/index.html');
 })
-console.log(expandButtonElement)
+
 expandButtonElement.addEventListener('click', e => {
   if(formElement.classList.length === 1) {
     formElement.classList.add('show');
@@ -59,6 +59,14 @@ const sortMovies = (moviesArray) => {
     return moviesArray;
   }
 }
+//this function used the unique dates in the movies object to know which movie to delete. 
+const deleteMovie = (data, date) => {
+  for(let item in data) {
+    if(data[item].date === +date) {
+      return item;
+    }
+  }
+}
 
 const connectFrontEnd = (data) => {
   //connecting the local user object to the databse user object
@@ -68,18 +76,16 @@ const connectFrontEnd = (data) => {
       //creating a reference at the specific users /movie direcotry
       userRef = ref(database, 'users/' + user + '/movies');
       //listening to changes in the /movies directory to respond to changes
+  
       onValue(userRef, (data) => {
         moviesUl.innerHTML = '';
-        const movieList = data.val();
-        
-  
+        console.log(data.val());
         //sort movies so that the most recent are first in the list
-        let moviesArray = sortMovies(Object.values(currentUser.movies));
+        let moviesArray = sortMovies(Object.values(data.val()));
         
         //looping through list of movies, and creating Elements to represent the movie
         moviesArray.forEach(movie => {
           
-
           let runtime;
           let genre;
           let year;
@@ -109,13 +115,8 @@ const connectFrontEnd = (data) => {
           }
           const li = document.createElement('li');
 
-          li.setAttribute("data-id", key);
-          //setting HTML to users cant inject malicious code
-          li.innerHTML = `<div class="listHeader"><h3>${title}</h3><button class="delete">-</button></div>
-
-
-          li.innerHTML = `<h3 class="listHeader">${title}</h3>
-
+          li.innerHTML = 
+          `<h3 class="listHeader">${title}</h3>
           <div class="statContainer">
           <div class="stats">
           <h4>Runtime:</h4><p>${runtime}</p>
@@ -128,6 +129,7 @@ const connectFrontEnd = (data) => {
           </div>
           <div class="stats">
           <h4>Synopsis:</h4><p>${synopsis}</p>
+          <button class='delete' id="${movie.date}">Delete</button>
           </div>
           </div>`
 
@@ -138,17 +140,17 @@ const connectFrontEnd = (data) => {
             statContainer.classList.toggle('expand');
           })
 
-        }
+        })
+        
         // Delete button - This removes an item from the list
         const deleteButtons = document.querySelectorAll('.delete');
         deleteButtons.forEach(button => {
           button.addEventListener('click', function (e) {
-            const li = this.parentNode.parentNode;
-            const nodeId = li.getAttribute('data-id');
-            const nodeRef = ref(database, 'users/' + user + '/movies/' + nodeId);
-            console.log(nodeRef);
+            debugger;
+            const movieId = deleteMovie(data.val(), e.target.id)
+            const movieRef = ref(database, '/users' + `/${user}` + '/movies' + `/${movieId}`)
+            remove(movieRef);
           })
-
         })
       })
     }

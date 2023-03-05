@@ -23,17 +23,18 @@ if (window.location.pathname !== '/functionality.html') {
     //for loop going through users checking to see if username and password match a specific user
 
     Object.values(frontEndData.users).forEach((user, i) => {
-      console.log(i)
+      
       if (user.username === givenUsername && user.password === givenPassword) {
-        
+        debugger; 
         setCurrentUser(user);
         window.localStorage.setItem('user', JSON.stringify(currentUser));
         window.location.assign('functionality.html');
-      } else if (i === Object.values(frontEndData.users).length - 1) {
-        alert('There is no account with that username and password combination')
-      }
-      
+        
+      } 
     })
+    if (i === Object.values(frontEndData.users).length - 1) {
+      alert('There is no account with that username and password combination')
+  }
   })
 
   signupFormElement.addEventListener('submit', e => {

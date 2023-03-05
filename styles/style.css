@@ -379,7 +379,6 @@ li:last-of-type {
   max-height: 50rem;
 }
 
-
 .delete {
   margin: 0;
   padding: 0;
@@ -389,6 +388,7 @@ li:last-of-type {
 }
 .delete:hover {
   color: #000;
+}
 
 .movieForm {
   display: none;
@@ -415,5 +415,4 @@ li:last-of-type {
 .show textarea {
   resize: none;
   height: 10rem;
-
 }
