@@ -59,7 +59,7 @@ const sortMovies = (moviesArray) => {
     return moviesArray;
   }
 }
-//this function used the unique dates in the movies object to know which movie to delete. 
+//this function returns the unique id for the movie that is be be deleted. Using the unique date asociated with the object.
 const deleteMovie = (data, date) => {
   for(let item in data) {
     if(data[item].date === +date) {
@@ -79,7 +79,6 @@ const connectFrontEnd = (data) => {
   
       onValue(userRef, (data) => {
         moviesUl.innerHTML = '';
-        console.log(data.val());
         //sort movies so that the most recent are first in the list
         let moviesArray = sortMovies(Object.values(data.val()));
         

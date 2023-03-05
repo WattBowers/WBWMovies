@@ -10,6 +10,22 @@ let currentUser = {};
 
 const setCurrentUser = (value) => (currentUser = value)
 
+ //forEach loop going through users checking to see if username and password match a specific user
+const checkUsersList = (givenUsername, givenPassword, users) => {
+  let foundUser = false;
+  Object.values(users).forEach((user, i) => {
+    if (user.username === givenUsername && user.password === givenPassword) {
+      setCurrentUser(user);
+      window.localStorage.setItem('user', JSON.stringify(currentUser));
+      window.location.assign('functionality.html');
+      foundUser = true;
+    }
+    if (Object.values(users).length - 1 === i && foundUser === false) {
+      alert('There is no account with that username and password combination')
+  }
+  })
+}
+
 if (window.location.pathname !== '/functionality.html') {
   const loginFormElement = document.querySelector('#loginForm');
   const signupFormElement = document.querySelector('#signUpForm');
@@ -20,21 +36,7 @@ if (window.location.pathname !== '/functionality.html') {
     const givenUsername = e.target[0].value;
     const givenPassword = e.target[1].value;
 
-    //for loop going through users checking to see if username and password match a specific user
-
-    Object.values(frontEndData.users).forEach((user, i) => {
-      
-      if (user.username === givenUsername && user.password === givenPassword) {
-        debugger; 
-        setCurrentUser(user);
-        window.localStorage.setItem('user', JSON.stringify(currentUser));
-        window.location.assign('functionality.html');
-        
-      } 
-    })
-    if (i === Object.values(frontEndData.users).length - 1) {
-      alert('There is no account with that username and password combination')
-  }
+    checkUsersList(givenUsername, givenPassword, frontEndData.users)
   })
 
   signupFormElement.addEventListener('submit', e => {
