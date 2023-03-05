@@ -18,7 +18,7 @@ if (currentUser === null) {
 
 logOutButton.addEventListener('click', e => {
   window.localStorage.removeItem('user');
-  window.location.assign('https://project02movietracker.netlify.app/index.html');
+  window.location.assign('/index.html');
 })
 console.log(expandButtonElement)
 expandButtonElement.addEventListener('click', e => {
