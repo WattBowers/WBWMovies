@@ -11,17 +11,17 @@
 
 <body class="functionalityPage">
     <header>
-        <div class="wrapper">
+        <div class="wrapper titleFlex">
             <h1>Movie app</h1>
-            <button id="logOut">Log Out</button>
+            <button class="logOut" id="logOut">Log Out</button>
         </div>
     </header>
     <main>
         <section class="movies">
             <div class="wrapper">
-                <h2>Movies</h2>
+                
                 <button id="addMovie" aria-label="Add a movie">+</button>
-                <form id="movieForm" action="submit">
+                <form class="movieForm" id="movieForm" action="submit">
                     <label for="movieTitle" class="sr-only">Title - Required</label>
                     <input id="movieTitle" placeholder="Title *" required="true" type="text">
 
@@ -39,6 +39,7 @@
 
                     <button type="submit">Add to list</button>
                 </form>
+                <h2>Movies</h2>
                 <ul class="moviesList">
                     <!-- Content to be added in here -->
                 </ul>

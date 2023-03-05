@@ -6,6 +6,8 @@ const dbRef = ref(database);
 
 const logOutButton = document.getElementById('logOut');
 const moviesUl = document.querySelector('.moviesList');
+const expandButtonElement = document.querySelector('#addMovie');
+const formElement = document.querySelector('#movieForm')
 
 let userRef;
 let currentUser = JSON.parse(window.localStorage.getItem('user'));
@@ -17,6 +19,14 @@ if (currentUser === null) {
 logOutButton.addEventListener('click', e => {
   window.localStorage.removeItem('user');
   window.location.assign('https://project02movietracker.netlify.app/index.html');
+})
+console.log(expandButtonElement)
+expandButtonElement.addEventListener('click', e => {
+  if(formElement.classList.length === 1) {
+    formElement.classList.add('show');
+  } else if (formElement.classList.length === 2) {
+    formElement.classList.remove('show')
+  }
 })
 
 const addMovie = (title, runtime, genre, year, synopsis, userRef) => {
@@ -65,7 +75,6 @@ const connectFrontEnd = (data) => {
   
         //sort movies so that the most recent are first in the list
         let moviesArray = sortMovies(Object.values(currentUser.movies));
-        console.log(moviesArray, typeof(moviesArray));
         
         //looping through list of movies, and creating Elements to represent the movie
         moviesArray.forEach(movie => {
