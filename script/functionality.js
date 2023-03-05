@@ -40,7 +40,6 @@ const connectFrontEnd = (data) => {
         const movieList = data.val();
         //looping through list of movies, and creating Elements to represent the movie
         for (let key in currentUser.movies) {
-
           let title;
           let runtime;
           let genre;
@@ -73,7 +72,7 @@ const connectFrontEnd = (data) => {
             synopsis = movieList[key].synopsis;
           }
           const li = document.createElement('li');
-          li.setAttribute("data-node-id", `${movieList[key]}`);
+          li.setAttribute("data-id", key);
           //setting HTML to users cant inject malicious code
           li.innerHTML = `<div class="listHeader"><h3>${title}</h3><button class="delete">-</button></div>
           <div class="statContainer">
@@ -101,12 +100,10 @@ const connectFrontEnd = (data) => {
         // Delete button - This removes an item from the list
         const deleteButtons = document.querySelectorAll('.delete');
         deleteButtons.forEach(button => {
-          button.addEventListener('click', function () {
+          button.addEventListener('click', function (e) {
             const li = this.parentNode.parentNode;
-            console.log(li);
-            const nodeId = li.dataset.nodeId;
-            console.log(nodeId);
-            const nodeRef = ref(movieList, `/${nodeId}`);
+            const nodeId = li.getAttribute('data-id');
+            const nodeRef = ref(database, 'users/' + user + '/movies/' + nodeId);
             console.log(nodeRef);
           })
         })
