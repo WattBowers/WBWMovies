@@ -19,50 +19,66 @@ if (window.location.pathname !== '/functionality.html') {
     e.preventDefault();
     const givenUsername = e.target[0].value;
     const givenPassword = e.target[1].value;
-    
 
     //for loop going through users checking to see if username and password match a specific user
 
-    Object.values(frontEndData.users).forEach((user) => {
+    Object.values(frontEndData.users).forEach((user, i) => {
+      console.log(i)
       if (user.username === givenUsername && user.password === givenPassword) {
         
         setCurrentUser(user);
         window.localStorage.setItem('user', JSON.stringify(currentUser));
         window.location.assign('functionality.html');
+      } else if (i === Object.values(frontEndData.users).length - 1) {
+        alert('There is no account with that username and password combination')
       }
+      
     })
   })
 
   signupFormElement.addEventListener('submit', e => {
     e.preventDefault();
+    
+    const pUsernameElement = document.querySelector('.sameUsernameWarning');
+    const pElement = document.querySelector('.passwordWarning');
+
+    pUsernameElement.classList.add('hidden');
+    pElement.classList.add('hidden');
+    
     const givenUsername = e.target[0].value;
     const givenPassword = e.target[1].value;
     const givenConfirmPassword = e.target[2].value;
+    
+    e.target[0].value = '';
+    e.target[1].value = '';
+    e.target[2].value = '';
     let isTakenUsername = false;
     const userObject = ref(database, 'users');
 
+  // check to see if username already exists
     
+    for (let user in frontEndData.users) {
+      let checkUser = frontEndData.users[user].username;
+      if (givenUsername === checkUser) {
+        isTakenUsername = true;
+        pUsernameElement.classList.remove('hidden')
+        return;
+      }
+    }
+
     // Make sure that both passwords match
     if (givenPassword !== givenConfirmPassword) {
-      const pElement = document.querySelector('.passwordWarning')
+      
       pElement.classList.remove('hidden')
       return;
     }
 
-  // check to see if username already exists
-    for (let user in frontEndData.users) {
-      let checkUser = frontEndData.users[user].username;
-      const pUsernameElement = document.querySelector('.sameUsernameWarning')
-      if (givenUsername === checkUser) {
-        isTakenUsername = true;
-        pUsernameElement.classList.remove('hidden')
-        break;
-      }
-    }
     //Checking to see if username is already taken, if not will create new user and push to database
     if (isTakenUsername === false) {
       push(userObject, constructUser(givenUsername, givenPassword));
       setCurrentUser(constructUser(givenUsername, givenPassword));
+      window.localStorage.setItem('user', JSON.stringify(currentUser));
+      window.location.assign('functionality.html');
     }
   })
 
