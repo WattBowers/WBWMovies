@@ -1,5 +1,19 @@
 @use "./global.scss" as *;
 
+.movies {
+    margin-top: 25px;
+}
+
+.titleFlex {
+    display: flex;
+    justify-content: space-between;
+    .logOut {
+        margin: 0;
+        align-self: center;
+    }
+}
+
+
 .listHeader {
     margin: 0;
     padding: 2rem;
@@ -26,4 +40,25 @@ li {
 
 .expand {
     max-height: 50rem;
+}
+
+.movieForm {
+    display: none;
+    transition: 1s;
+}
+
+.show {
+    display: flex;
+    flex-direction: column;
+    input, textarea {
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 1.5rem;
+        border-style: solid;
+        outline: none;
+    }
+    textarea {
+        resize: none;
+        height: 10rem;
+    }
 }
