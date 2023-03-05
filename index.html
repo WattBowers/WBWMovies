@@ -14,22 +14,22 @@
         <div class="wrapper">
             <h1>Movie app</h1>
             <form id="loginForm">
-                <input id="username" type="text" placeholder="Username">
+                <input required="true" id="username" type="text" placeholder="Username">
                 <label class="sr-only" for="username">Username</label>
 
-                <input id="password" type="text" placeholder="Password">
+                <input required="true" id="password" type="password" placeholder="Password">
                 <label class="sr-only" for="password">Password</label>
 
                 <button type="submit">log in</button>
             </form>
             <form id="signUpForm">
-                <input id="username" type="text" placeholder="Username">
-                <label class="sr-only" for="username">Username</label>
+                <input required="true" id="signUpUsername" type="text" placeholder="Username">
+                <label class="sr-only" for="signUpUsername">Username</label>
 
-                <input id="password" type="text" placeholder="Password">
-                <label class="sr-only" for="password">Password</label>
+                <input required="true" id="signUpPassword" type="text" placeholder="Password">
+                <label class="sr-only" for="signUpPassword">Password</label>
 
-                <input id="confirmPasswordpassword" type="text" placeholder="Confirm your password">
+                <input required="true" id="confirmPasswordpassword" type="text" placeholder="Confirm your password">
                 <label class="sr-only" for="confirmPassword">Confirm your password</label>
 
                 <button type="submit">sign up</button>

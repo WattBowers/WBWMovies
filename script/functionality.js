@@ -3,17 +3,30 @@ import { getDatabase, ref, onValue, push, remove } from "https://www.gstatic.com
 
 const database = getDatabase(firebase);
 const dbRef = ref(database);
+
 const logOutButton = document.getElementById('logOut');
 const moviesUl = document.querySelector('.moviesList');
+const expandButtonElement = document.querySelector('#addMovie');
+const formElement = document.querySelector('#movieForm')
+
 let userRef;
 let currentUser = JSON.parse(window.localStorage.getItem('user'));
+
 if (currentUser === null) {
   window.location.assign('/index.html');
 }
 
 logOutButton.addEventListener('click', e => {
   window.localStorage.removeItem('user');
-  window.location.assign('https://project02movietracker.netlify.app/index.html');
+  window.location.assign('/index.html');
+})
+console.log(expandButtonElement)
+expandButtonElement.addEventListener('click', e => {
+  if(formElement.classList.length === 1) {
+    formElement.classList.add('show');
+  } else if (formElement.classList.length === 2) {
+    formElement.classList.remove('show')
+  }
 })
 
 const addMovie = (title, runtime, genre, year, synopsis, userRef) => {
@@ -23,8 +36,28 @@ const addMovie = (title, runtime, genre, year, synopsis, userRef) => {
     genre: genre,
     year: year,
     synopsis: synopsis,
+    date: Date.now()
   }
   push(userRef, movie);
+}
+
+const sortMovies = (moviesArray) => {
+
+  let sorted = false;
+  for(let i = 0; i < moviesArray.length - 1; i++) {
+    if(moviesArray[i].date < moviesArray[i + 1].date) {
+     
+      let storage = moviesArray[i]
+      moviesArray[i] = moviesArray[i + 1]
+      moviesArray[i + 1] = storage;
+      sorted = true;
+    }
+  } 
+  if (sorted === true) {
+    return sortMovies(moviesArray);
+  } else {
+    return moviesArray;
+  }
 }
 
 const connectFrontEnd = (data) => {
@@ -38,43 +71,51 @@ const connectFrontEnd = (data) => {
       onValue(userRef, (data) => {
         moviesUl.innerHTML = '';
         const movieList = data.val();
+        
+  
+        //sort movies so that the most recent are first in the list
+        let moviesArray = sortMovies(Object.values(currentUser.movies));
+        
         //looping through list of movies, and creating Elements to represent the movie
-        for (let key in currentUser.movies) {
-          let title;
+        moviesArray.forEach(movie => {
+          
+
           let runtime;
           let genre;
           let year;
           let synopsis;
 
-          if (movieList[key].title === undefined) {
-            title = '';
-          } else {
-            title = movieList[key].title;
-          }
-          if (movieList[key].runtime === undefined) {
+          const title = movie.title;
+          
+          if (movie.runtime === undefined) {
             runtime = '';
           } else {
-            runtime = movieList[key].runtime;
+            runtime = movie.runtime;
           }
-          if (movieList[key].genre === undefined) {
+          if (movie.genre === undefined) {
             genre = '';
           } else {
-            genre = movieList[key].genre;
+            genre = movie.genre;
           }
-          if (movieList[key].year === undefined) {
+          if (movie.year === undefined) {
             year = '';
           } else {
-            year = movieList[key].year;
+            year = movie.year;
           }
-          if (movieList[key].synopsis === undefined) {
+          if (movie.synopsis === undefined) {
             synopsis = '';
           } else {
-            synopsis = movieList[key].synopsis;
+            synopsis = movie.synopsis;
           }
           const li = document.createElement('li');
+
           li.setAttribute("data-id", key);
           //setting HTML to users cant inject malicious code
           li.innerHTML = `<div class="listHeader"><h3>${title}</h3><button class="delete">-</button></div>
+
+
+          li.innerHTML = `<h3 class="listHeader">${title}</h3>
+
           <div class="statContainer">
           <div class="stats">
           <h4>Runtime:</h4><p>${runtime}</p>
@@ -96,6 +137,7 @@ const connectFrontEnd = (data) => {
             const statContainer = this.nextElementSibling;
             statContainer.classList.toggle('expand');
           })
+
         }
         // Delete button - This removes an item from the list
         const deleteButtons = document.querySelectorAll('.delete');
@@ -106,6 +148,7 @@ const connectFrontEnd = (data) => {
             const nodeRef = ref(database, 'users/' + user + '/movies/' + nodeId);
             console.log(nodeRef);
           })
+
         })
       })
     }
@@ -114,7 +157,7 @@ const connectFrontEnd = (data) => {
 
 onValue(dbRef, (data) => {
   if (data.exists()) {
-    //this function does the work of gettign the user information, and showing the movies list
+    //this function does the work of getting the user information, and showing the movies list
     connectFrontEnd(data.val());
   }
 })

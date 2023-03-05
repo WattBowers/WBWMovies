@@ -1,11 +1,6 @@
 @use "../partials/global" as *;
 
-.passwordWarning {
-    @include bodyText;
-    color: grey;
-}
-
-.sameUsernameWarning {
+.passwordWarning .sameUsernameWarning {
     @include bodyText;
     color: grey;
 }

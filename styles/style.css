@@ -319,15 +319,7 @@ h3 {
   margin-left: 1.2rem;
 }
 
-.passwordWarning {
-  font-family: "Inter", sans-serif;
-  font-size: 0.7rem;
-  line-height: 1.8rem;
-  letter-spacing: 0.3px;
-  color: grey;
-}
-
-.sameUsernameWarning {
+.passwordWarning .sameUsernameWarning {
   font-family: "Inter", sans-serif;
   font-size: 0.7rem;
   line-height: 1.8rem;
@@ -337,6 +329,24 @@ h3 {
 
 .hidden {
   display: none;
+}
+
+.movies {
+  margin-top: 25px;
+}
+
+.titleFlex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.titleFlex .logOut {
+  margin: 0;
+  -ms-flex-item-align: center;
+      align-self: center;
 }
 
 .listHeader {
@@ -369,6 +379,7 @@ li:last-of-type {
   max-height: 50rem;
 }
 
+
 .delete {
   margin: 0;
   padding: 0;
@@ -378,4 +389,31 @@ li:last-of-type {
 }
 .delete:hover {
   color: #000;
+
+.movieForm {
+  display: none;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+.show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.show input, .show textarea {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 1.5rem;
+  border-style: solid;
+  outline: none;
+}
+.show textarea {
+  resize: none;
+  height: 10rem;
+
 }
