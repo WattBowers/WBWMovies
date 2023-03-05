@@ -15,13 +15,13 @@
 
 
 .listHeader {
-    margin: 0;
-    padding: 2rem;
-
+    display: flex;
+    justify-content: space-between;
     &:hover {
         background-color: #FFFAF0;
     }
 }
+
 
 li {
     border-top: 1px solid $tertiary;
@@ -42,6 +42,16 @@ li {
     max-height: 50rem;
 }
 
+
+.delete {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    color: $tertiary;
+    font-size: 5rem;
+    &:hover {
+        color: #000;
+
 .movieForm {
     display: none;
     transition: 1s;
@@ -60,5 +70,6 @@ li {
     textarea {
         resize: none;
         height: 10rem;
+
     }
 }

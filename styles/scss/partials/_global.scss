@@ -80,7 +80,8 @@ form {
 h3 {
     @include titleText;
     font-size: 2rem;
-    margin-bottom: 3.6rem;
+    margin: 0;
+    padding: 2rem 0;
 }
 
 .stats {
