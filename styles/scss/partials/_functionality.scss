@@ -1,13 +1,13 @@
 @use "./global.scss" as *;
 
 .listHeader {
-    margin: 0;
-    padding: 2rem;
-
+    display: flex;
+    justify-content: space-between;
     &:hover {
         background-color: #FFFAF0;
     }
 }
+
 
 li {
     border-top: 1px solid $tertiary;
@@ -26,4 +26,15 @@ li {
 
 .expand {
     max-height: 50rem;
+}
+
+.delete {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    color: $tertiary;
+    font-size: 5rem;
+    &:hover {
+        color: #000;
+    }
 }

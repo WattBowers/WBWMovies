@@ -1,5 +1,5 @@
 import firebase from './firebase.js'
-import { getDatabase, ref, onValue, push } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+import { getDatabase, ref, onValue, push, remove } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 
 const database = getDatabase(firebase);
 const dbRef = ref(database);
@@ -34,7 +34,7 @@ const connectFrontEnd = (data) => {
       currentUser = data.users[user];
       //creating a reference at the specific users /movie direcotry
       userRef = ref(database, 'users/' + user + '/movies');
-      //listening to changes in the /movies directory to respond to  changes
+      //listening to changes in the /movies directory to respond to changes
       onValue(userRef, (data) => {
         moviesUl.innerHTML = '';
         const movieList = data.val();
@@ -73,8 +73,9 @@ const connectFrontEnd = (data) => {
             synopsis = movieList[key].synopsis;
           }
           const li = document.createElement('li');
+          li.setAttribute("data-node-id", `${movieList[key]}`);
           //setting HTML to users cant inject malicious code
-          li.innerHTML = `<h3 class="listHeader">${title}</h3>
+          li.innerHTML = `<div class="listHeader"><h3>${title}</h3><button class="delete">-</button></div>
           <div class="statContainer">
           <div class="stats">
           <h4>Runtime:</h4><p>${runtime}</p>
@@ -92,11 +93,23 @@ const connectFrontEnd = (data) => {
 
           moviesUl.append(li);
 
-          li.firstChild.addEventListener('click', function(){
+          li.firstChild.addEventListener('click', function () {
             const statContainer = this.nextElementSibling;
             statContainer.classList.toggle('expand');
           })
         }
+        // Delete button - This removes an item from the list
+        const deleteButtons = document.querySelectorAll('.delete');
+        deleteButtons.forEach(button => {
+          button.addEventListener('click', function () {
+            const li = this.parentNode.parentNode;
+            console.log(li);
+            const nodeId = li.dataset.nodeId;
+            console.log(nodeId);
+            const nodeRef = ref(movieList, `/${nodeId}`);
+            console.log(nodeRef);
+          })
+        })
       })
     }
   }
@@ -122,4 +135,5 @@ movieForm.addEventListener('submit', function (event) {
   addMovie(title, runtime, genre, year, synopsis, userRef);
   movieForm.reset();
 })
+
 
