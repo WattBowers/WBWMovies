@@ -146,7 +146,6 @@ const connectFrontEnd = (data) => {
         const deleteButtons = document.querySelectorAll('.delete');
         deleteButtons.forEach(button => {
           button.addEventListener('click', function (e) {
-            debugger;
             const movieId = deleteMovie(data.val(), e.target.id)
             const movieRef = ref(database, '/users' + `/${user}` + '/movies' + `/${movieId}`)
             remove(movieRef);
