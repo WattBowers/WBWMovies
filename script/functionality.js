@@ -43,7 +43,6 @@ const addMovie = (title, runtime, genre, year, synopsis, userRef) => {
     synopsis: synopsis,
     date: Date.now()
   }
-  currentUserChangedDb = true;
   push(userRef, movie);
 }
 //takes in the list of users movies, and sorts them newest first
