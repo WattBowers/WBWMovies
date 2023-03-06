@@ -25,6 +25,36 @@ html {
     @include bodyText;
 }
 
+body {
+    min-height: 100vh;
+    position: relative;
+    box-sizing: inherit;
+}
+
+header {
+    min-height: 9vh;
+    background-color: $primary;
+    button {
+        background-color: $secondary;
+        color: $primary;
+    }
+}
+
+main {
+    min-height: 84vh;
+    overflow-y: scroll;
+    padding-bottom: 3.1rem;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    min-height: 7vh;
+    background-color: $primary;
+}
+
 img {
     width: 100%;
     height: auto;
@@ -100,11 +130,4 @@ h3 {
     p {
         margin-left: 1.2rem;
     }
-}
-
-footer {
-    position: absolute;
-    bottom: 0;
-    text-align: center;
-    width: 100%;
 }
