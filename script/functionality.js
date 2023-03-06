@@ -88,6 +88,7 @@ const connectFrontEnd = (data) => {
         let moviesArray = sortMovies(Object.values(data.val()));
         
         //looping through list of movies, and creating Elements to represent the movie
+        
         moviesArray.forEach(movie => {
           
           let runtime;
