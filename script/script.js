@@ -17,7 +17,7 @@ const checkUsersList = (givenUsername, givenPassword, users) => {
     if (user.username === givenUsername && user.password === givenPassword) {
       setCurrentUser(user);
       window.localStorage.setItem('user', JSON.stringify(currentUser));
-      window.location.assign('functionality.html');
+      window.location.assign('moviesList.html');
       foundUser = true;
     }
     if (Object.values(users).length - 1 === i && foundUser === false) {
@@ -26,7 +26,7 @@ const checkUsersList = (givenUsername, givenPassword, users) => {
   })
 }
 
-if (window.location.pathname !== '/functionality.html') {
+if (window.location.pathname !== '/moviesList.html') {
   const loginFormElement = document.querySelector('#loginForm');
   const signupFormElement = document.querySelector('#signUpForm');
   
@@ -42,11 +42,11 @@ if (window.location.pathname !== '/functionality.html') {
   signupFormElement.addEventListener('submit', e => {
     e.preventDefault();
     
-    const pUsernameElement = document.querySelector('.sameUsernameWarning');
-    const pElement = document.querySelector('.passwordWarning');
+    const pUsernameWarningElement = document.querySelector('.sameUsernameWarning');
+    const pWarningElement = document.querySelector('.passwordWarning');
 
-    pUsernameElement.classList.add('hidden');
-    pElement.classList.add('hidden');
+    pUsernameWarningElement.classList.add('hidden');
+    pWarningElement.classList.add('hidden');
     
     const givenUsername = e.target[0].value;
     const givenPassword = e.target[1].value;
@@ -64,15 +64,14 @@ if (window.location.pathname !== '/functionality.html') {
       let checkUser = frontEndData.users[user].username;
       if (givenUsername === checkUser) {
         isTakenUsername = true;
-        pUsernameElement.classList.remove('hidden')
+        pUsernameWarningElement.classList.remove('hidden')
         return;
       }
     }
 
     // Make sure that both passwords match
     if (givenPassword !== givenConfirmPassword) {
-      
-      pElement.classList.remove('hidden')
+      pWarningElement.classList.remove('hidden')
       return;
     }
 
@@ -81,7 +80,7 @@ if (window.location.pathname !== '/functionality.html') {
       push(userObject, constructUser(givenUsername, givenPassword));
       setCurrentUser(constructUser(givenUsername, givenPassword));
       window.localStorage.setItem('user', JSON.stringify(currentUser));
-      window.location.assign('functionality.html');
+      window.location.assign('/moviesList.html');
     }
   })
 

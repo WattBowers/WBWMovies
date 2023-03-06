@@ -310,7 +310,7 @@ h3 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 2.4rem 0;
+  margin-bottom: 1.5rem;
 }
 .stats h4,
 .stats p {
@@ -368,6 +368,11 @@ footer {
 }
 .listHeader:hover {
   background-color: #FFFAF0;
+}
+
+i {
+  position: relative;
+  bottom: 10px;
 }
 
 li {

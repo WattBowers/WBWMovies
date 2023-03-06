@@ -8,6 +8,7 @@ const logOutButton = document.getElementById('logOut');
 const moviesUl = document.querySelector('.moviesList');
 const expandButtonElement = document.querySelector('#addMovie');
 const formElement = document.querySelector('#movieForm')
+const movieTitleElement = document.querySelector('#userMovieTitle')
 
 let userRef;
 let currentUser = JSON.parse(window.localStorage.getItem('user'));
@@ -15,6 +16,8 @@ let currentUser = JSON.parse(window.localStorage.getItem('user'));
 if (currentUser === null) {
   window.location.assign('/index.html');
 }
+
+movieTitleElement.textContent = `${currentUser.username}'s Movie List`
 
 logOutButton.addEventListener('click', e => {
   window.localStorage.removeItem('user');
@@ -24,8 +27,10 @@ logOutButton.addEventListener('click', e => {
 expandButtonElement.addEventListener('click', e => {
   if(formElement.classList.length === 1) {
     formElement.classList.add('show');
+    e.target.innerHTML = 'ADD MOVIE ⬆'
   } else if (formElement.classList.length === 2) {
-    formElement.classList.remove('show')
+    formElement.classList.remove('show');
+    e.target.innerHTML = 'ADD MOVIE ⬇'
   }
 })
 
@@ -42,7 +47,6 @@ const addMovie = (title, runtime, genre, year, synopsis, userRef) => {
 }
 
 const sortMovies = (moviesArray) => {
-
   let sorted = false;
   for(let i = 0; i < moviesArray.length - 1; i++) {
     if(moviesArray[i].date < moviesArray[i + 1].date) {
@@ -59,6 +63,7 @@ const sortMovies = (moviesArray) => {
     return moviesArray;
   }
 }
+
 //this function returns the unique id for the movie that is be be deleted. Using the unique date asociated with the object.
 const deleteMovie = (data, date) => {
   for(let item in data) {
