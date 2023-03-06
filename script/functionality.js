@@ -1,5 +1,5 @@
 import firebase from './firebase.js'
-import { getDatabase, ref, onValue, push, remove } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+import { getDatabase, ref, onValue, push, remove, get } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 
 const database = getDatabase(firebase);
 const dbRef = ref(database);
@@ -43,6 +43,7 @@ const addMovie = (title, runtime, genre, year, synopsis, userRef) => {
     synopsis: synopsis,
     date: Date.now()
   }
+  currentUserChangedDb = true;
   push(userRef, movie);
 }
 //takes in the list of users movies, and sorts them newest first
@@ -89,64 +90,64 @@ const connectFrontEnd = (data) => {
         
         //looping through list of movies, and creating Elements to represent the movie
         
-        moviesArray.forEach(movie => {
+          moviesArray.forEach(movie => {
           
-          let runtime;
-          let genre;
-          let year;
-          let synopsis;
-
-          const title = movie.title;
-          
-          if (movie.runtime === undefined) {
-            runtime = '';
-          } else {
-            runtime = movie.runtime;
-          }
-          if (movie.genre === undefined) {
-            genre = '';
-          } else {
-            genre = movie.genre;
-          }
-          if (movie.year === undefined) {
-            year = '';
-          } else {
-            year = movie.year;
-          }
-          if (movie.synopsis === undefined) {
-            synopsis = '';
-          } else {
-            synopsis = movie.synopsis;
-          }
-          const li = document.createElement('li');
-
-          li.innerHTML = 
-          `<h3 class="listHeader">${title}</h3>
-          <div class="statContainer">
-          <div class="stats">
-          <h4>Runtime:</h4><p>${runtime}</p>
-          </div>
-          <div class="stats">
-          <h4>Genre:</h4><p>${genre}</p>
-          </div>
-          <div class="stats">
-          <h4>Year:</h4><p>${year}</p>
-          </div>
-          <div class="stats">
-          <h4>Synopsis:</h4><p>${synopsis}</p>
-          </div>
-          <button class='delete' aria-label='Delete movie' id='${movie.date}'>
-          <i class='fa-solid fa-circle-minus fa-2xs'></i></button>
-          </div>`
-
-          moviesUl.append(li);
-
-          li.firstChild.addEventListener('click', function () {
-            const statContainer = this.nextElementSibling;
-            statContainer.classList.toggle('expand');
+            let runtime;
+            let genre;
+            let year;
+            let synopsis;
+  
+            const title = movie.title;
+            
+            if (movie.runtime === undefined) {
+              runtime = '';
+            } else {
+              runtime = movie.runtime;
+            }
+            if (movie.genre === undefined) {
+              genre = '';
+            } else {
+              genre = movie.genre;
+            }
+            if (movie.year === undefined) {
+              year = '';
+            } else {
+              year = movie.year;
+            }
+            if (movie.synopsis === undefined) {
+              synopsis = '';
+            } else {
+              synopsis = movie.synopsis;
+            }
+            const li = document.createElement('li');
+  
+            li.innerHTML = 
+            `<h3 class="listHeader">${title}</h3>
+            <div class="statContainer">
+            <div class="stats">
+            <h4>Runtime:</h4><p>${runtime}</p>
+            </div>
+            <div class="stats">
+            <h4>Genre:</h4><p>${genre}</p>
+            </div>
+            <div class="stats">
+            <h4>Year:</h4><p>${year}</p>
+            </div>
+            <div class="stats">
+            <h4>Synopsis:</h4><p>${synopsis}</p>
+            </div>
+            <button class='delete' aria-label='Delete movie' id='${movie.date}'>
+            <i class='fa-solid fa-circle-minus fa-2xs'></i></button>
+            </div>`
+  
+            moviesUl.append(li);
+  
+            li.firstChild.addEventListener('click', function () {
+              const statContainer = this.nextElementSibling;
+              statContainer.classList.toggle('expand');
+            })
+  
           })
-
-        })
         
         // Delete button - This removes an item from the list
         const deleteButtons = document.querySelectorAll('.delete');
@@ -162,12 +163,14 @@ const connectFrontEnd = (data) => {
   }
 }
 
-onValue(dbRef, (data) => {
-  if (data.exists()) {
-    //this function does the work of getting the user information, and showing the movies list
-    connectFrontEnd(data.val());
-  }
+get(dbRef).then((snapshot) => {
+    connectFrontEnd(snapshot.val());
+}).catch((error) => {
+  alert(error);
 })
+
+
+
 
 const movieForm = document.querySelector('#movieForm');
 
