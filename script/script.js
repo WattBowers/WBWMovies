@@ -44,14 +44,14 @@ if (window.location.pathname !== '/moviesList.html') {
     
     const pUsernameWarningElement = document.querySelector('.sameUsernameWarning');
     const pWarningElement = document.querySelector('.passwordWarning');
-
+    //hiding warnings 
     pUsernameWarningElement.classList.add('hidden');
     pWarningElement.classList.add('hidden');
     
     const givenUsername = e.target[0].value;
     const givenPassword = e.target[1].value;
     const givenConfirmPassword = e.target[2].value;
-    
+    //resetting sign up fields
     e.target[0].value = '';
     e.target[1].value = '';
     e.target[2].value = '';

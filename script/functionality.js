@@ -18,7 +18,7 @@ if (currentUser === null) {
 }
 
 movieTitleElement.textContent = `${currentUser.username}'s Movie List`
-
+// logs the user out
 logOutButton.addEventListener('click', e => {
   window.localStorage.removeItem('user');
   window.location.assign('/index.html');
