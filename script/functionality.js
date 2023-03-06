@@ -23,7 +23,7 @@ logOutButton.addEventListener('click', e => {
   window.localStorage.removeItem('user');
   window.location.assign('/index.html');
 })
-
+//hides/shows the addMovie form
 expandButtonElement.addEventListener('click', e => {
   if(formElement.classList.length === 1) {
     formElement.classList.add('show');
@@ -33,7 +33,7 @@ expandButtonElement.addEventListener('click', e => {
     e.target.innerHTML = 'ADD MOVIE ⬇'
   }
 })
-
+// takes the information and creates an object representing the movie, then pushes to the database
 const addMovie = (title, runtime, genre, year, synopsis, userRef) => {
   const movie = {
     title: title,
@@ -45,12 +45,11 @@ const addMovie = (title, runtime, genre, year, synopsis, userRef) => {
   }
   push(userRef, movie);
 }
-
+//takes in the list of users movies, and sorts them newest first
 const sortMovies = (moviesArray) => {
   let sorted = false;
   for(let i = 0; i < moviesArray.length - 1; i++) {
     if(moviesArray[i].date < moviesArray[i + 1].date) {
-     
       let storage = moviesArray[i]
       moviesArray[i] = moviesArray[i + 1]
       moviesArray[i + 1] = storage;
@@ -58,6 +57,7 @@ const sortMovies = (moviesArray) => {
     }
   } 
   if (sorted === true) {
+    //reruns the function if it is not done being sorted. 
     return sortMovies(moviesArray);
   } else {
     return moviesArray;
