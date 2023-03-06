@@ -7,6 +7,7 @@
 .titleFlex {
     display: flex;
     justify-content: space-between;
+
     .logOut {
         margin: 0;
         align-self: center;
@@ -17,6 +18,7 @@
 .listHeader {
     display: flex;
     justify-content: space-between;
+
     &:hover {
         background-color: #FFFAF0;
     }
@@ -28,6 +30,12 @@ li {
 
     &:last-of-type {
         border-bottom: 1px solid $tertiary;
+    }
+    .delete {
+        position: relative;
+        bottom: 0;
+        right: 0;
+        max-width: 3.5rem;
     }
 }
 
@@ -49,8 +57,10 @@ li {
     background-color: transparent;
     color: $tertiary;
     font-size: 5rem;
-    &:hover {
+
+    &:hover > i {
         color: #000;
+        pointer-events: none;
     }
 }
 
@@ -63,16 +73,30 @@ li {
 .show {
     display: flex;
     flex-direction: column;
-    input, textarea {
+
+    input,
+    textarea {
         padding: 1rem;
         margin: 1rem 0;
         border-radius: 1.5rem;
         border-style: solid;
         outline: none;
     }
+
     textarea {
         resize: none;
         height: 10rem;
+width: 100%;
+    }
+}
 
+@media (min-width: 450px) {
+    .show {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        input {
+            width: 48%;
+        }
     }
 }

@@ -64,13 +64,16 @@ button {
 form {
     display: flex;
     flex-direction: column;
-    input, textarea {
+
+    input,
+    textarea {
         padding: 1rem;
         margin: 1rem 0;
         border-radius: 1.5rem;
         border-style: solid;
         outline: none;
     }
+
     textarea {
         resize: none;
         height: 10rem;
@@ -87,11 +90,21 @@ h3 {
 .stats {
     display: flex;
     margin: 2.4rem 0;
-    h4, p {
+
+    h4,
+    p {
         margin: 0;
         font-size: 1.2rem;
     }
+
     p {
         margin-left: 1.2rem;
     }
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
 }

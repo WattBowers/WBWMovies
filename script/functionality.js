@@ -128,8 +128,9 @@ const connectFrontEnd = (data) => {
           </div>
           <div class="stats">
           <h4>Synopsis:</h4><p>${synopsis}</p>
-          <button class='delete' id="${movie.date}">Delete</button>
           </div>
+          <button class='delete' aria-label='Delete movie' id='${movie.date}'>
+          <i class='fa-solid fa-circle-minus fa-2xs'></i></button>
           </div>`
 
           moviesUl.append(li);
