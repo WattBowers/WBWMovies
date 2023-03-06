@@ -1,14 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="./styles.css">
+    <title>WBW Movies</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./styles/style.css">
 </head>
-<body>
-    <h2></h2>
+
+<body class="indexPage">
+    <header>
+        <div class="wrapper">
+            <h1 class="welcomeHeading">WBW Movies</h1>
+        </div>
+    </header>
+    <main>
+        <div class="wrapper">
+
+            <form id="loginForm">
+                <input required="true" id="username" type="text" placeholder="Username">
+                <label class="sr-only" for="username">Username</label>
+
+                <input required="true" id="password" type="password" placeholder="Password">
+                <label class="sr-only" for="password">Password</label>
+
+                <button type="submit">log in</button>
+            </form>
+            <form id="signUpForm">
+                <input required="true" id="signUpUsername" type="text" placeholder="Username">
+                <label class="sr-only" for="signUpUsername">Username</label>
+
+                <input required="true" id="signUpPassword" type="text" placeholder="Password">
+                <label class="sr-only" for="signUpPassword">Password</label>
+
+                <input required="true" id="confirmPasswordpassword" type="text" placeholder="Confirm your password">
+                <label class="sr-only" for="confirmPassword">Confirm your password</label>
+
+                <button type="submit">sign up</button>
+            </form>
+            <p class="passwordWarning hidden">Your passwords do not match</p>
+            <p class="sameUsernameWarning hidden">Sorry that username is already taken</p>
+        </div>
+    </main>
+    <footer>
+        <div class="wrapper">
+            <p class="attribution">Made by Jackson Watt-Bowers and Galen White.</p>
+        </div>
+    </footer> 
     <script src="./script/script.js" type="module"></script>
 </body>
+
 </html>

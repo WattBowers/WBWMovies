@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WBW Movies</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./styles/style.css">
+    
+</head>
+
+<body class="functionalityPage">
+    <header>
+        <div class="wrapper titleFlex">
+            <h1>WBW Movies</h1>
+            <button class="logOut" id="logOut">Log Out</button>
+        </div>
+    </header>
+    <main>
+        <section class="movies">
+            <div class="wrapper">
+
+                <button id="addMovie" aria-label="Add a movie">ADD MOVIE ⬇</button>
+                <form class="movieForm" id="movieForm" action="submit">
+                    <label for="movieTitle" class="sr-only">Title - Required</label>
+                    <input id="movieTitle" placeholder="Title *" required="true" type="text">
+
+                    <label for="runtime" class="sr-only">Runtime</label>
+                    <input id="runtime" placeholder="Runtime" type="text">
+
+                    <label for="movieGenre" class="sr-only">Genre</label>
+                    <input id="movieGenre" placeholder="Genre" type="text">
+
+                    <label for="movieYear" class="sr-only">Year</label>
+                    <input id="movieYear" placeholder="Year" type="text">
+
+                    <label for="movieSynopsis" class="sr-only">Synopsis</label>
+                    <textarea id="movieSynopsis" placeholder="Synopsis"></textarea>
+
+                    <button type="submit">Add to list</button>
+                </form>
+                <h2 id="userMovieTitle">Movies</h2>
+                <ul class="moviesList">
+                    <!-- Content to be added in here -->
+                </ul>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="wrapper">
+            <p class="attribution">Made by Jackson Watt-Bowers and Galen White.</p>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/e4f1610b04.js" crossorigin="anonymous"></script>
+    <script src="./script/script.js" type="module"></script>
+    <script src="./script/functionality.js" type="module"></script>
+</body>
+
+</html>

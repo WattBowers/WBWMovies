@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Open+Sans:wght@700&display=swap');
+
+$headingFont: 'Open Sans', sans-serif;
+$bodyFont: 'Inter', sans-serif;
+$primary: #00BFFF;
+$secondary: #FFF;
+$tertiary: #708090;
+
+@mixin titleText {
+    font-family: $headingFont;
+    font-size: 2.3rem;
+    line-height: 1.2rem;
+    letter-spacing: .1px;
+}
+
+@mixin bodyText {
+    font-family: $bodyFont;
+    font-size: .7rem;
+    line-height: 1.8rem;
+    letter-spacing: .3px;
+}
+
+
+html {
+    @include bodyText;
+}
+
+body {
+    min-height: 100vh;
+    position: relative;
+    box-sizing: inherit;
+}
+
+header {
+    min-height: 9vh;
+    background-color: $primary;
+    button {
+        background-color: $secondary;
+        color: $primary;
+    }
+}
+
+main {
+    min-height: 84vh;
+    overflow-y: scroll;
+    padding-bottom: 3.1rem;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    min-height: 7vh;
+    background-color: $primary;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.wrapper {
+    max-width: 1200px;
+    width: 85%;
+    margin: 0 auto;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+h1 {
+    @include titleText;
+    text-align: center;
+    font-size: 3rem;
+}
+
+button {
+    background-color: $primary;
+    background-color: #00BFFF;
+    padding: 1.2rem 0;
+    border-radius: 5rem;
+    text-transform: uppercase;
+    color: $secondary;
+    border-style: none;
+    width: 10rem;
+    margin: 0 auto;
+    display: block;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+
+    input,
+    textarea {
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 1.5rem;
+        border-style: solid;
+        outline: none;
+    }
+
+    textarea {
+        resize: none;
+        height: 10rem;
+    }
+}
+
+h3 {
+    @include titleText;
+    font-size: 2rem;
+    margin: 0;
+    padding: 2rem 0;
+}
+
+.stats {
+    display: flex;
+    margin-bottom: 1.5rem;
+
+    h4,
+    p {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+
+    p {
+        margin-left: 1.2rem;
+    }
+}
