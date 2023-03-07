@@ -34,6 +34,8 @@ body {
 header {
     min-height: 9vh;
     background-color: $primary;
+    display: flex;
+    align-items: center;
     button {
         background-color: $secondary;
         color: $primary;
@@ -53,6 +55,8 @@ footer {
     width: 100%;
     min-height: 7vh;
     background-color: $primary;
+    display: flex;
+    align-items: center;
 }
 
 img {
@@ -76,6 +80,7 @@ h1 {
     @include titleText;
     text-align: center;
     font-size: 3rem;
+    line-height: 3rem;
 }
 
 button {
@@ -89,6 +94,12 @@ button {
     width: 10rem;
     margin: 0 auto;
     display: block;
+    &:hover {
+        color: black;
+    }
+    &:focus-visible {
+        border: 2px solid $tertiary;
+    }
 }
 
 form {
@@ -107,27 +118,5 @@ form {
     textarea {
         resize: none;
         height: 10rem;
-    }
-}
-
-h3 {
-    @include titleText;
-    font-size: 2rem;
-    margin: 0;
-    padding: 2rem 0;
-}
-
-.stats {
-    display: flex;
-    margin-bottom: 1.5rem;
-
-    h4,
-    p {
-        margin: 0;
-        font-size: 1.2rem;
-    }
-
-    p {
-        margin-left: 1.2rem;
     }
 }

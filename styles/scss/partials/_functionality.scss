@@ -22,6 +22,10 @@
     &:hover {
         background-color: #FFFAF0;
     }
+    &:focus-visible {
+        color: $primary;
+        outline: none;
+    }
 }
 
 i {
@@ -54,6 +58,31 @@ li {
     max-height: 50rem;
 }
 
+h3 {
+    @include titleText;
+    font-size: 2rem;
+    line-height: 2.5rem;
+    margin: 0;
+    padding: 1rem 0;
+}
+
+.stats {
+    display: flex;
+    margin-bottom: 1.5rem;
+    &:first-of-type {
+        padding-top: 1rem;
+    }
+
+    h4,
+    p {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+
+    p {
+        margin-left: 1.2rem;
+    }
+}
 
 .delete {
     margin: 0;
