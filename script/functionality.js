@@ -122,7 +122,7 @@ const connectFrontEnd = (data) => {
             const li = document.createElement('li');
   
             li.innerHTML = 
-            `<h3 class="listHeader">${title}</h3>
+            `<h3 class="listHeader" tabindex="0">${title}</h3>
             <div class="statContainer">
             <div class="stats">
             <h4>Runtime:</h4><p>${runtime}</p>
@@ -136,7 +136,7 @@ const connectFrontEnd = (data) => {
             <div class="stats">
             <h4>Synopsis:</h4><p>${synopsis}</p>
             </div>
-            <button class='delete' aria-label='Delete movie' id='${movie.date}'>
+            <button class='delete' aria-label='Delete ${title}' id='${movie.date}'>
             <i class='fa-solid fa-circle-minus fa-2xs'></i></button>
             </div>`
   
